@@ -23,7 +23,7 @@ import (
 	svcsdk "github.com/aws/aws-sdk-go/service/ec2"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	svcapitypes "github.com/crossplane/provider-aws/apis/ec2/v1alpha1"
+	svcapitypes "github.com/crossplane/provider-aws/apis/ec2/manualv1alpha1"
 )
 
 // NOTE(muvaf): We return pointers in case the function needs to start with an
@@ -177,10 +177,10 @@ func GenerateVPCPeeringConnection(resp *svcsdk.DescribeVpcPeeringConnectionsOutp
 			for _, f4iter := range elem.Tags {
 				f4elem := &svcapitypes.Tag{}
 				if f4iter.Key != nil {
-					f4elem.Key = f4iter.Key
+					f4elem.Key = *f4iter.Key
 				}
 				if f4iter.Value != nil {
-					f4elem.Value = f4iter.Value
+					f4elem.Value = *f4iter.Value
 				}
 				f4 = append(f4, f4elem)
 			}
@@ -227,11 +227,11 @@ func GenerateCreateVpcPeeringConnectionInput(cr *svcapitypes.VPCPeeringConnectio
 				f3elemf1 := []*svcsdk.Tag{}
 				for _, f3elemf1iter := range f3iter.Tags {
 					f3elemf1elem := &svcsdk.Tag{}
-					if f3elemf1iter.Key != nil {
-						f3elemf1elem.SetKey(*f3elemf1iter.Key)
+					if f3elemf1iter.Key != "" {
+						f3elemf1elem.SetKey(f3elemf1iter.Key)
 					}
-					if f3elemf1iter.Value != nil {
-						f3elemf1elem.SetValue(*f3elemf1iter.Value)
+					if f3elemf1iter.Value != "" {
+						f3elemf1elem.SetValue(f3elemf1iter.Value)
 					}
 					f3elemf1 = append(f3elemf1, f3elemf1elem)
 				}

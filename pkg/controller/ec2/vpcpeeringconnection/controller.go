@@ -20,7 +20,6 @@ package vpcpeeringconnection
 
 import (
 	"context"
-	"fmt"
 
 	svcapi "github.com/aws/aws-sdk-go/service/ec2"
 	svcsdk "github.com/aws/aws-sdk-go/service/ec2"
@@ -35,7 +34,7 @@ import (
 	"github.com/crossplane/crossplane-runtime/pkg/reconciler/managed"
 	cpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 
-	svcapitypes "github.com/crossplane/provider-aws/apis/ec2/v1alpha1"
+	svcapitypes "github.com/crossplane/provider-aws/apis/ec2/manualv1alpha1"
 	awsclient "github.com/crossplane/provider-aws/pkg/clients"
 )
 
@@ -253,10 +252,10 @@ func (e *external) Create(ctx context.Context, mg cpresource.Managed) (managed.E
 		for _, f4iter := range resp.VpcPeeringConnection.Tags {
 			f4elem := &svcapitypes.Tag{}
 			if f4iter.Key != nil {
-				f4elem.Key = f4iter.Key
+				f4elem.Key = *f4iter.Key
 			}
 			if f4iter.Value != nil {
-				f4elem.Value = f4iter.Value
+				f4elem.Value = *f4iter.Value
 			}
 			f4 = append(f4, f4elem)
 		}

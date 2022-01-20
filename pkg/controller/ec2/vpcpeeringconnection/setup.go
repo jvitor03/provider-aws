@@ -15,7 +15,7 @@ import (
 	"github.com/crossplane/crossplane-runtime/pkg/reconciler/managed"
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 
-	svcapitypes "github.com/crossplane/provider-aws/apis/ec2/v1alpha1"
+	svcapitypes "github.com/crossplane/provider-aws/apis/ec2/manualv1alpha1"
 	awsclients "github.com/crossplane/provider-aws/pkg/clients"
 
 	"k8s.io/client-go/util/workqueue"
