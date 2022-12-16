@@ -1,4 +1,4 @@
-module github.com/crossplane-contrib/provider-aws
+module github.com/jvitor03/provider-aws
 
 go 1.18
 
